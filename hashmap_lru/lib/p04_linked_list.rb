@@ -52,22 +52,12 @@ class LinkedList
   end
 
   def get(key)
-    # self.each { |node| return node.val if node.key == key }
-    current_node = @head
-    until current_node == @tail
-      return current_node.val if current_node.key == key
-      current_node = current_node.next
-    end
-    current_node.val
-
+    self.each { |node| return node.val if node.key == key }
+    nil
   end
 
   def include?(key)
-    current_node = @head
-    until current_node == @tail
-      return true if current_node.key == key
-      current_node = current_node.next
-    end
+    self.each { |node| return true if node.key == key }
     false
   end
 
@@ -82,23 +72,11 @@ class LinkedList
   end
 
   def update(key, val)
-    current_node = @head
-    until current_node == @tail
-      if current_node.key == key
-        current_node.val = val
-      end
-      current_node = current_node.next
-    end
+    self.each { |node| node.val = val if node.key == key }
   end
 
   def remove(key)
-    current_node = @head
-    until current_node == @tail
-      if current_node.key == key
-        current_node.remove
-      end
-      current_node = current_node.next
-    end
+    self.each { |node| node.remove if node.key == key }
   end
 
   def each(&prc)
@@ -110,7 +88,7 @@ class LinkedList
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
