@@ -1,0 +1,44 @@
+div {
+  /*width: 200px;
+  height: 200px;*/
+  /*padding: 50px;*/
+  border: 5px solid black;
+}
+
+#first-div {
+  background-color: #39cccc;
+  min-height: 400px;
+}
+
+#second-div {
+  background-color: #ff4136;
+  box-sizing: border-box;
+}
+
+#third-div {
+  background-color: #ff1846;
+  min-height: 10px;
+}
+
+#image-1-container {
+  width: 200px;
+  height: 600px;
+  background-color: #ff4136;
+}
+
+#image-2-container {
+  min-width: 200px;
+  background-color: #ff4136;
+}
+
+#cat {
+  width: 100%;
+}
+
+#cat2 {
+  min-width: 200px;
+}
+
+p {
+  background-color: #7fdbff;
+}
