@@ -11,32 +11,28 @@ class HashMap
   end
 
   def include?(key)
-    i = key.hash % num_buckets
-    @store[i].include?(key)
+    bucket(key).include?(key)
   end
 
   def set(key, val)
-    i = key.hash % num_buckets
-    if @store[i].include?(key)
-      @store[i].update(key, val)
+    if bucket(key).include?(key)
+      bucket(key).update(key, val)
     else
       if @count == num_buckets
         resize!
       end
-      @store[i].append(key, val)
+      bucket(key).append(key, val)
       @count += 1
     end
   end
 
   def get(key)
-    i = key.hash % num_buckets
-    @store[i].get(key)
+    bucket(key).get(key)
   end
 
   def delete(key)
-    i = key.hash % num_buckets
-    if @store[i].include?(key)
-      @store[i].remove(key)
+    if bucket(key).include?(key)
+      bucket(key).remove(key)
       @count -= 1
     end
   end
@@ -48,12 +44,12 @@ class HashMap
   end
 
   # uncomment when you have Enumerable included
-  # def to_s
-  #   pairs = inject([]) do |strs, (k, v)|
-  #     strs << "#{k.to_s} => #{v.to_s}"
-  #   end
-  #   "{\n" + pairs.join(",\n") + "\n}"
-  # end
+  def to_s
+    pairs = inject([]) do |strs, (k, v)|
+      strs << "#{k.to_s} => #{v.to_s}"
+    end
+    "{\n" + pairs.join(",\n") + "\n}"
+  end
 
   alias_method :[], :get
   alias_method :[]=, :set
@@ -76,6 +72,6 @@ class HashMap
   end
 
   def bucket(key)
-    # optional but useful; return the bucket corresponding to `key`
+    @store[key.hash % num_buckets]
   end
 end
